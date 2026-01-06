@@ -10,7 +10,7 @@ public class AccountMapper {
                 accountDto.getAccountName(),
                 accountDto.getBalance()
         );
-    };
+    }
 
     public static AccountDto mapToAccountDto (Account account) {
         return new AccountDto(

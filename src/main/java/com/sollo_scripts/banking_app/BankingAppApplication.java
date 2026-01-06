@@ -8,7 +8,7 @@ import org.springframework.boot.persistence.autoconfigure.EntityScan;
 @EntityScan("com.sollo_scripts.banking_app.entity")
 public class BankingAppApplication {
 
-	public static void main(String[] args) {
+    static void main(String[] args) {
 		SpringApplication.run(BankingAppApplication.class, args);
 	}
 
