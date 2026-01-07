@@ -2,6 +2,7 @@ package com.sollo_scripts.banking_app.service.impl;
 
 import com.sollo_scripts.banking_app.dto.AccountDto;
 import com.sollo_scripts.banking_app.entity.Account;
+import com.sollo_scripts.banking_app.exception.AccountException;
 import com.sollo_scripts.banking_app.mapper.AccountMapper;
 import com.sollo_scripts.banking_app.repository.AccountRepository;
 import com.sollo_scripts.banking_app.service.AccountService;
@@ -36,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto getAccountById(Long id) {
         Account account = this.accountRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> new AccountException("Account does not exist"));
         return AccountMapper.mapToAccountDto(account);
     }
 
@@ -44,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto depositFunds(Long id, Double amount) {
         Account account = this.accountRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> new AccountException("Account does not exist"));
 
         double total = account.getBalance() + amount;
         return this.updateAccount(account, total);
@@ -54,10 +55,10 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto withdrawFunds(Long id, Double amount) {
         Account account = this.accountRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> new AccountException("Account does not exist"));
 
         if (account.getBalance() < amount) {
-            throw new RuntimeException("Insufficient Balance");
+            throw new AccountException("Insufficient Balance");
         }
 
         double total =   account.getBalance() - amount;
@@ -76,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
         Account account = this.accountRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> new AccountException("Account does not exist"));
         accountRepository.deleteById(id);
     }
 }

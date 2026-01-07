@@ -6,9 +6,13 @@ import com.sollo_scripts.banking_app.entity.Account;
 public class AccountMapper {
     public static Account mapToAccount (AccountDto accountDto) {
         return new Account (
-                accountDto.getId(),
-                accountDto.getAccountName(),
-                accountDto.getBalance()
+//                accountDto.getId(),
+//                accountDto.getAccountName(),
+//                accountDto.getBalance()
+                accountDto.id(),
+                accountDto.accountName(),
+                accountDto.balance()
+
         );
     }
 
