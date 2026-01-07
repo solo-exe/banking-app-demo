@@ -1,6 +1,5 @@
 package com.sollo_scripts.banking_app.entity;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
 import lombok.*;
@@ -13,7 +12,6 @@ import lombok.*;
 @Entity
 public class Account {
     @Id
-    @Nonnull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
