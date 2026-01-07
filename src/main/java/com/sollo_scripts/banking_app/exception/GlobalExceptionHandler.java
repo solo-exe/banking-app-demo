@@ -12,32 +12,29 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Handle Specific Exceptions
-    @ExceptionHandler(AccountException.class)
-    public ResponseEntity<@NonNull ErrorDetails> handleAccountException (
-            AccountException exception,
-            WebRequest webRequest
-    ) {
-         ErrorDetails errorDetails =
-                 new ErrorDetails(
-                         LocalDateTime.now(),
-                         exception.getMessage(),
-                         webRequest.getDescription(false),
-                         "ACCOUNT_NOT_FOUND"
-                 );
+        // Handle Specific Exceptions
+        @ExceptionHandler(AccountException.class)
+        public ResponseEntity<@NonNull ErrorDetails> handleAccountException(
+                        AccountException exception,
+                        WebRequest webRequest) {
+                ErrorDetails errorDetails = new ErrorDetails(
+                                LocalDateTime.now(),
+                                exception.getMessage(),
+                                webRequest.getDescription(false),
+                                "ACCOUNT_NOT_FOUND");
 
-         return  new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
+                return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        }
 
-    // Handle Generic Exceptions
-    @ExceptionHandler(Exception.class)
-    public  ResponseEntity<@NonNull ErrorDetails> handleGenericException (Exception exception, WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(
-                LocalDateTime.now(),
-                exception.getMessage(),
-                webRequest.getDescription(false),
-                "INTERNAL_SERVER_ERROR"
-        );
-        return  new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+        // Handle Generic Exceptions
+        @ExceptionHandler(Exception.class)
+        public ResponseEntity<@NonNull ErrorDetails> handleGenericException(Exception exception,
+                        WebRequest webRequest) {
+                ErrorDetails errorDetails = new ErrorDetails(
+                                LocalDateTime.now(),
+                                exception.getMessage(),
+                                webRequest.getDescription(false),
+                                "INTERNAL_SERVER_ERROR");
+                return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 }

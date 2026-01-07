@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface AccountService {
 
-    AccountDto createAccount (AccountDto accountDto);
+    AccountDto createAccount(AccountDto accountDto);
 
-    AccountDto getAccountById (Long id);
+    AccountDto getAccountById(Long id);
 
-    AccountDto depositFunds (Long id, Double amount);
+    AccountDto depositFunds(Long id, Double amount);
 
-    AccountDto withdrawFunds (Long id, Double amount);
+    AccountDto withdrawFunds(Long id, Double amount);
 
-    List<AccountDto> listAccounts ();
+    List<AccountDto> listAccounts();
 
-    void deleteAccount (Long id);
+    void deleteAccount(Long id);
 }

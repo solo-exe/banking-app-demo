@@ -16,14 +16,14 @@ public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
 
-    private AccountDto updateAccount (Account account, double total) {
+    public AccountServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
+    private AccountDto updateAccount(Account account, double total) {
         account.setBalance(total);
         Account savedAccount = accountRepository.save(account);
         return AccountMapper.mapToAccountDto(savedAccount);
-    }
-
-    public AccountServiceImpl(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
     }
 
     @Override
@@ -61,15 +61,15 @@ public class AccountServiceImpl implements AccountService {
             throw new AccountException("Insufficient Balance");
         }
 
-        double total =   account.getBalance() - amount;
+        double total = account.getBalance() - amount;
         return this.updateAccount(account, total);
     }
 
     @Override
     public List<AccountDto> listAccounts() {
         List<Account> accounts = this.accountRepository.findAll();
-//        accounts.stream().map(account -> AccountMapper.mapToAccountDto(account))
-//                .collect(Collectors.toList());
+        // accounts.stream().map(account -> AccountMapper.mapToAccountDto(account))
+        // .collect(Collectors.toList());
         return accounts.stream().map(AccountMapper::mapToAccountDto).collect(Collectors.toList());
     }
 
