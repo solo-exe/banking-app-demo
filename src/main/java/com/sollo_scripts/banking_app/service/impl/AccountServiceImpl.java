@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAccount(Long id) {
-        Account account = this.accountRepository
+        this.accountRepository
                 .findById(id)
                 .orElseThrow(() -> new AccountException("Account does not exist"));
         accountRepository.deleteById(id);
